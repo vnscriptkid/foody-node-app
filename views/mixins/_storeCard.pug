@@ -1,0 +1,15 @@
+mixin storeCard(store = {})
+    .card.mb-4(style="min-height: 460px")
+        img.card-img-top(src="https://cmkt-image-prd.global.ssl.fastly.net/0.1.0/ps/1673549/580/386/m1/fpnw/wm0/2-.jpg?1474338752&s=af9f05ac7d724e97ad706f2bd7ceb4a0" alt="logo")
+        .card-body.d-flex.flex-column
+            h5.card-title.d-flex
+                span.mr-auto= store.name
+                if user
+                    form(action=`/stores/${store.id}/heart` onsubmit="handleHeartSubmit(event)")
+                        - const heartColor = user.hearts.map(heart => heart.toString()).includes(store.id) ? 'red' : 'gray';
+                        button(style="background: transparent; border: none")
+                            i(class="fas fa-heart" style=`color: ${heartColor}; cursor: pointer`)
+            p.card-text= store.description.length > 60 ? store.description.substr(0, 59) + ' ...' : store.description
+            if (user && store.author && user.id === store.author.toString())
+                a.btn.btn-dark.btn-block.text-light(href=`/stores/${store.id}/edit`) Edit
+            a.btn.btn-success.btn-block.text-light.mt-auto(href=`/stores/${store.slug}`) Store Details

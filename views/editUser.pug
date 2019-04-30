@@ -1,0 +1,14 @@
+extends layout
+
+block main
+    .container
+        h2.display-4= title
+        form(method="POST" action="/account")
+            .form-group
+                label(for="nameUpdateInput")
+                input.form-control(name="name", type="text", id="nameUpdateInput", placeholder="e.g. Steve Clark")
+            .form-group
+                label(for="emailUpdateInput")
+                input.form-control(name="email", type="email", id="emailUpdateInput", placeholder="e.g. example@gmail.com")
+            .form-group
+                input.btn.btn-warning(type="submit" value="UPDATE MY ACCOUNT")

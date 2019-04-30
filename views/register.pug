@@ -1,0 +1,21 @@
+extends layout
+
+block main
+    .bg-light.p-4
+        div.p-4.mb-5(style="background: white")
+            form.mx-auto(style="max-width: 600px" method="POST" action="/register")
+                h3 REGISTER
+                hr
+                .form-group
+                    label(for="nameRegister") Name
+                    input#nameRegister.form-control(type="text", placeholder="e.g. Steve Clark", name="name", value=(user && user.name))
+                .form-group
+                    label(for="emailRegister") Email
+                    input#emailRegister.form-control(type="text", placeholder="e.g. example@gmail.com", name="email", value=(user && user.email))
+                .form-group
+                    label(for="passwordRegister") Password
+                    input#passwordRegister.form-control(type="password", name="password")
+                .form-group
+                    label(for="confirmPasswordRegister") Confirm Password
+                    input#confirmPasswordRegister.form-control(type="password", name="confirmPassword")
+                button(type="submit").btn.btn-warning.btn-block REGISTER

@@ -1,0 +1,30 @@
+extends layout
+
+include mixins/_storeCard.pug
+
+block main
+    .container
+        .display-4.my-4= title
+        table(class="table table-hover")
+            thead
+                tr
+                    th(scope="col") photo
+                    th(scope="col") ranking
+                    th(scope="col") name
+                    th(scope="col") reviews
+                    th(scope="col") average rating
+                    th(scope="col") more
+
+            tbody
+                - let rank = 0;
+                each store in stores
+                    tr
+                        td
+                            img(src=`/public/uploads/photos/${store.photo}`)
+                        td= ++rank
+                        td= store.name
+                        td= store.reviews.length
+                        td= store.averageRating
+                        td
+                            a(href=`/stores/${store.slug}`) See more
+                    

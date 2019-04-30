@@ -1,0 +1,24 @@
+extends layout
+
+block main
+    .bg-light.p-4
+        div.p-4.mb-5(style="background: white")
+            form.mx-auto(method="POST", action="/login", style="max-width: 600px")
+                h3 LOGIN
+                hr
+                .form-group
+                    label Email
+                    input.form-control(type="email" name="email")
+                .form-group
+                    label Password
+                    input.form-control(type="password" name="password")
+                button.btn.btn-warning.btn-block LOGIN
+
+        div.p-4(style="background: white")
+            form.mx-auto(method="POST", action="/forgot" ,style="max-width: 600px")
+                h3 I FORGOT MY PASSWORD
+                hr
+                .form-group
+                    label Email
+                    input.form-control(type="email" name="email")
+                button.btn.btn-warning.btn-block RESET PASSWORD

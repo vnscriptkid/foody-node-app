@@ -1,0 +1,68 @@
+extends layout
+
+block main
+    .container.mt-5.mb-5
+        //- .card.bg-dark.text-white(style="height: 300px")
+
+        .d-flex
+            if store.photo        
+                .photoBox.mx-auto.mb-4(style="width: 800px;")
+                    img.w-100(src=`/public/uploads/photos/${store.photo}` alt=store.name)
+            .storeInfoBox.flex-1.p-3
+                .display-4.mb-3= store.name
+                if store.description
+                    p= store.description
+                if store.tags
+                    div
+                        each tag in store.tags
+                            span.badge.badge-warning.mr-2.p-2= tag
+
+            //- .card-img-overlay.d-flex.justify-content-center.align-items-center.text-center(style="background: black; opacity: .5")
+                h1.display-3= store.name
+        - const [lng, lat] = store.location.coordinates;
+        //- iframe.mt-3(src=produceMap(lat, lng) height=300)
+        .mapBox.d-flex.justify-content-center
+            iframe(src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d26644692.22900022!2d-119.3205676!3d35.3922128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5490102c93e83355%3A0x102565466944d59a!2sSeattle%2C+WA%2C+USA!5e0!3m2!1sen!2s!4v1556501620399!5m2!1sen!2s" width="600" height="450" frameborder="0" style="border:0" allowfullscreen)
+        if store.location && store.location.address
+            p.text-right
+                span.badge.badge-dark.px-3.py-2= store.location.address
+        #reviewBox.py-4
+            if user
+                .display-4 Leave ur Review
+                form(action=`/reviews/${store.id}` id="addReviewForm" method="POST")
+                    .form-group
+                        label(for="reviewTextarea") 
+                        textarea.form-control(id="reviewTextarea" name="text" rows="3" placeholder="What do you think about us?")
+                    .d-flex.align-items-center
+                        #starRating(class="w-50 starrating risingstar d-flex justify-content-center flex-row-reverse" style="font-size: 25px")
+                            input(type="radio" id="star5" name="rating" value="5" required)
+                            label.fas.fa-star(for="star5")
+                            input(type="radio" id="star4" name="rating" value="4")
+                            label.fas.fa-star(for="star4")
+                            input(type="radio" id="star3" name="rating" value="3")
+                            label.fas.fa-star(for="star3")
+                            input(type="radio" id="star2" name="rating" value="2")
+                            label.fas.fa-star(for="star2")
+                            input(type="radio" id="star1" name="rating" value="1")
+                            label.fas.fa-star(for="star1")
+                        input.btn.btn-dark.flex-grow-1(type="submit" value="SEND REVIEW")
+            else
+                .display-4
+                    a(href="/login") Login Now
+                    span To leave ur comment
+            .display-4 See Reviews
+            #reviewBox
+                each review in store.reviews
+                    .d-flex.border.align-items-center.p-3
+                        .w-10.pl-5                  
+                            img.rounded-circle(src=`${review.author.gravatar}`)
+                        .w-30.pl-5
+                            p.text-muted= fromNow(review.created)
+                            p= review.author.name
+                        .flex-grow-1.pl-5
+                            div
+                                each star in [1,2,3,4,5]
+                                    i.fas.fa-star(style=`color: ${(star <= review.rating) ? '#fae635' : 'gray'}`)
+                            p= review.text
+
+            

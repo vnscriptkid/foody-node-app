@@ -1,0 +1,35 @@
+mixin storeForm(store = {})
+    h2.display-4= title
+    - const action = Object.keys(store).length === 0 ? '/add' : `/add/${store.id}`;
+    form(method="POST" action=action enctype="multipart/form-data")
+        .form-group
+            label(for="storeNameInput")
+            input.form-control(name="name" value=`${store.name || ''}` type="text" id="storeNameInput" placeholder="Store Name")
+        .form-group
+            label(for="storeDesText")
+            textarea#storeDesText.form-control(name="description" rows="3" placeholder="Store Description")= store.description || ''
+        .form-group
+            label(for="avatarInput") Upload ur Photo
+            input.form-control(type="file" name="avatar" id="avatarInput")
+        if store.photo
+            .form-group
+                img(src=`/public/uploads/photos/${store.photo}`, width="200px", height="200px" , alt=store.photo)
+
+        .form-group
+            label(for="storeAddrInput")
+            input.form-control(name="location[address]" value=(store.location && store.location.address) id="storeAddrInput" placeholder="Store Address")
+        .form-group
+            label(for="lngInput")
+            input.form-control(name="location[coordinates][0]" value=(store.location && store.location.coordinates[0]) id="lngInput" placeholder="Longtitude" )
+        .form-group
+            label(for="latInput")
+            input.form-control(name="location[coordinates][1]" value=(store.location && store.location.coordinates[1]) id="latInput" placeholder="Latitude")
+
+        - const tags = [ 'Wifi', 'Open Late', 'Family Friendly', 'Vegetarian', 'Licensed' ];
+        .form-group
+            - storeTags = store.tags || [];
+            each tag in tags
+                .form-check.form-check-inline
+                    input.form-check-input(type="checkbox" name="tags" value=tag checked=storeTags.includes(tag))
+                    label.form-check-label= tag
+        button.btn.btn-dark(type="submit") Submit

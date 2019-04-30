@@ -1,0 +1,19 @@
+/* rating */
+
+label[for^="star"] {
+    /* color: rgb(250, 230, 53); */
+    color: gray;
+}
+
+input[name="rating"] {
+    width: .5px;
+    height: .5px;
+}
+
+input[name="rating"]:hover ~ label {
+    color: #fae635;
+}
+
+input[name="rating"]:checked ~ label {
+    color: rgb(250, 230, 53);
+}

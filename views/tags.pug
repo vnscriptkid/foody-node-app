@@ -1,0 +1,19 @@
+extends layout
+
+include mixins/_storeCard.pug
+
+block main
+    .container
+        h4.display-4= tag || 'Tags'
+        if Array.isArray(tags)
+            div
+                each tag in tags
+                    a.btn.mr-3(href=(`/tags/${tag._id}`) class=(tag._id === selectedTag ? 'btn-dark' : 'btn-warning'))
+                        span.mr-2=tag._id
+                        span.badge.badge-success= tag.count
+
+
+        .row.mt-4
+            each store in stores
+                .col-sm-6.col-md-4
+                    +storeCard(store)

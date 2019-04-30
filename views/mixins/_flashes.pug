@@ -1,0 +1,8 @@
+mixin flashes(flashes = {})
+    - const keys = Object.keys(flashes);
+    - const mapClasses = { success: 'success', error: 'danger', warning: 'warning' }
+    each key in keys
+        each msg in flashes[key]
+            .alert(class=`alert-${mapClasses[key]}`)!= msg
+
+
