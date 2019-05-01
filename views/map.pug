@@ -4,7 +4,7 @@ block main
     .container
         #map.mt-5.mx-auto(style='width: 1000px; height: 400px;')
     script.
-        mapboxgl.accessToken = 'pk.eyJ1Ijoidm5zY3JpcHRraWQiLCJhIjoiY2p2Mzd4NXkxMmRkNzN5c2s4ZjlpYjlhcSJ9.oEyeVaWj8YyCSDdt5bG3bg';
+        mapboxgl.accessToken = "#{process.env.MAPBOX_API}";
         var map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/streets-v9',
@@ -13,7 +13,7 @@ block main
         });
 
         var nearStores = !{JSON.stringify(stores)};
-        console.log(nearStores)
+        //- console.log(nearStores)
 
         function createFeatures(nearStores) {
             return nearStores.map(store => ({
