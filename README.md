@@ -18,3 +18,4 @@ https://foody-node-app.herokuapp.com/
 7. Show top highly rated stores by calculating average rating of each stores
 8. Look for near stores around you (within a certain distance)
 9. Live Search by store names as well as their descriptions with dropdown suggestions as users typing
+10. Pagination is supported when viewing list of stores
