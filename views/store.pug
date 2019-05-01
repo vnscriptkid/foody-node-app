@@ -21,8 +21,10 @@ block main
                 h1.display-3= store.name
         - const [lng, lat] = store.location.coordinates;
         //- iframe.mt-3(src=produceMap(lat, lng) height=300)
-        .mapBox.d-flex.justify-content-center
-            iframe(src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d26644692.22900022!2d-119.3205676!3d35.3922128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5490102c93e83355%3A0x102565466944d59a!2sSeattle%2C+WA%2C+USA!5e0!3m2!1sen!2s!4v1556501620399!5m2!1sen!2s" width="600" height="450" frameborder="0" style="border:0" allowfullscreen)
+        .display-4.text-center.mb-3 Where you can find us?
+        .mapBox.d-flex.justify-content-center.mb-3
+            //- iframe(src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d26644692.22900022!2d-119.3205676!3d35.3922128!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5490102c93e83355%3A0x102565466944d59a!2sSeattle%2C+WA%2C+USA!5e0!3m2!1sen!2s!4v1556501620399!5m2!1sen!2s" width="600" height="450" frameborder="0" style="border:0" allowfullscreen)
+            iframe(src=`https://api.mapbox.com/v4/mapbox.streets/zoomwheel,zoompan,geocoder,share.html?access_token=pk.eyJ1Ijoidm5zY3JpcHRraWQiLCJhIjoiY2p2Mzd4NXkxMmRkNzN5c2s4ZjlpYjlhcSJ9.oEyeVaWj8YyCSDdt5bG3bg#10/${lat}/${lng}` width="1000" height="400" frameborder="0" style="border: 0;" allowfullscreen)
         if store.location && store.location.address
             p.text-right
                 span.badge.badge-dark.px-3.py-2= store.location.address

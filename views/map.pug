@@ -1,0 +1,57 @@
+extends layout
+
+block main
+    .container
+        #map.mt-5.mx-auto(style='width: 1000px; height: 400px;')
+    script.
+        mapboxgl.accessToken = 'pk.eyJ1Ijoidm5zY3JpcHRraWQiLCJhIjoiY2p2Mzd4NXkxMmRkNzN5c2s4ZjlpYjlhcSJ9.oEyeVaWj8YyCSDdt5bG3bg';
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v9',
+            center: [106, 21],
+            zoom: 7
+        });
+
+        var nearStores = !{JSON.stringify(stores)};
+        console.log(nearStores)
+
+        function createFeatures(nearStores) {
+            return nearStores.map(store => ({
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": store.location.coordinates
+                },
+                "properties": {
+                    "title": store.name,
+                    "icon": "monument"
+                }
+            }))
+        }
+
+        const features = createFeatures(nearStores);
+        console.log(features);
+
+
+        map.on('load', function () { 
+            map.addLayer({
+                "id": "points",
+                "type": "symbol",
+                "source": {
+                    "type": "geojson",
+                    "data": {
+                        "type": "FeatureCollection",
+                        "features": features 
+                    }
+                },
+                "layout": {
+                    "icon-image": "{icon}-15",
+                    "text-field": "{title}",
+                    "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                    "text-offset": [0, 0.6],
+                    "text-anchor": "top"
+                }
+            });
+        });
+
+                

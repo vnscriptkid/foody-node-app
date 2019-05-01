@@ -8,6 +8,9 @@ html(lang="en")
         link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css", integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T", crossorigin="anonymous")
         link(rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous")
         link(rel="stylesheet" href="/public/style/styles.css")
+        script(src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js')
+        link(href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css', rel='stylesheet')
+
     body 
         block header
             nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
@@ -25,11 +28,10 @@ html(lang="en")
                             li.nav-item
                                 a.nav-link(href="/add") ADD
                             li.nav-item
-                                a.nav-link(href=("/map")) MAP
+                                a.nav-link(href=("/map?lng=106&lat=21")) MAP
                             if user
                                 li.nav-item
                                     a.nav-link(href="hearts") HEARTS
-
 
                         ul.navbar-nav   
                             .input-group.mr-4
@@ -53,8 +55,20 @@ html(lang="en")
 
         include mixins/_flashes.pug
         +flashes(flashes) 
+
+        //- div.container
+        //-     .display-1.mb-3 Map Search Playground 
+        //-     .form-group
+        //-         .dropdown
+        //-             input#mapSearchInput.form-control(type="text" placeholder="Type ur address")
+        //-             .dropdown-menu#mapSearchDropdown
+        //-     .form-group
+        //-         input#lngInput.form-control(type="text" placeholder="longtitude")
+        //-     .form-group
+        //-         input#latInput.form-control(type="text" placeholder="latitude")
+        
         block main
 
         block footer
-        script(src=`https://maps.googleapis.com/maps/api/js?key=${MAP_API_KEY}&libraries=places`)
+        //- script(src=`https://maps.googleapis.com/maps/api/js?key=${MAP_API_KEY}&libraries=places`)
         script(src="/public/dist/bundle.js")

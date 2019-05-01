@@ -157,7 +157,7 @@ exports.mapStores = (req, res, next) => {
         }
     })
     .then(stores => {
-        res.send(stores);
+        res.render('map', { title: 'Map', stores })
     })
 }
 

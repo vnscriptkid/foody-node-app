@@ -10,10 +10,11 @@ block main
                 .col-sm-6.col-md-4
                     +storeCard(store)
         nav(aria-label='Page navigation example')
-        ul.pagination.d-flex.justify-content-center
-            li.page-item(class=(page === 1 ? 'disabled' : ''))
-                a.page-link(href=`/stores/page/${page - 1}`) Previous
-            li.page-item
-                a.page-link(href='#')= `Page ${page} / ${total}`
-            li.page-item(class=((page + 1) * limit > total ? 'disabled' : ''))
-                a.page-link(href=`/stores/page/${page + 1}`) Next
+        if page
+            ul.pagination.d-flex.justify-content-center
+                li.page-item(class=(page === 1 ? 'disabled' : ''))
+                    a.page-link(href=`/stores/page/${page - 1}`) Previous
+                li.page-item
+                    a.page-link(href='#')= `Page ${page} / ${total}`
+                li.page-item(class=((page + 1) * limit > total ? 'disabled' : ''))
+                    a.page-link(href=`/stores/page/${page + 1}`) Next
